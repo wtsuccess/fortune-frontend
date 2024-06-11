@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-white bg-background;
+}
+
+.container {
+  @apply mx-auto w-full max-w-[1536px] px-5;
+}
+
+input,
+select,
+textarea {
+  @apply outline-none;
+}
+
+h1 {
+  @apply font-bold text-[56px] leading-normal text-center;
+}
+
+h2 {
+  @apply font-bold text-[38px] leading-normal text-center;
+}
+
+h3 {
+  @apply font-bold text-[28px] leading-normal text-center;
+}
+
+h4 {
+  @apply font-bold text-xl leading-normal text-center;
+}
+
+h5 {
+  @apply font-bold text-[40px] leading-normal text-center;
+}
+
+h6 {
+  @apply font-bold text-[20px] leading-normal text-center;
+}
+
+p.text {
+  @apply text-base leading-[1.36] text-center;
+}
+
+p.title {
+  @apply font-medium text-lg leading-normal text-center;
+}
+
+p.bottom {
+  @apply font-normal text-sm text-center;
+}	
+
+.mySlider .rc-slider-track {
+  @apply h-[21px] !bg-blue -translate-y-[6px];
+}
+
+.mySlider .rc-slider-rail {
+  @apply h-5 rounded-[30px] -translate-y-[5px];
+}
+
+.mySlider .rc-slider-handle {
+  @apply w-7 h-7 aspect-square -mt-2;
+}
