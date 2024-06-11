@@ -18,7 +18,6 @@ export const approve = async (totalPrice: number) => {
     });
     const hash = await writeContract(config, request);
     const approveResult = await waitForTransactionReceipt(config, { hash });
-    console.log("approveResult", approveResult);
 }
 
 export const getAllowance = async (owner: `0x${string}`, spender: string) => {

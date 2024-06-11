@@ -34,7 +34,6 @@ export default function BuyTicket({ remainedUSDC }: { remainedUSDC: number }) {
   useEffect(() => {
     const fetchIsExpired = async () => {
       const isExpired = await getIsExpired();
-      console.log("isExpired", isExpired);
       setIsExpired(isExpired);
     };
     fetchIsExpired();
@@ -52,8 +51,6 @@ export default function BuyTicket({ remainedUSDC }: { remainedUSDC: number }) {
     const fetchStatus = async () => {
       const draw = await getDraw();
       const status = draw[1];
-      console.log("status", status);
-
       setStatus(status);
     };
     fetchStatus();
@@ -84,7 +81,7 @@ export default function BuyTicket({ remainedUSDC }: { remainedUSDC: number }) {
       await drop(numTicket);
       toast.success("Transaction Successful!");
     } catch (err: any) {
-      toast.error("Transaction Failed");
+      toast.error(err.message);
     }
   };
 
@@ -93,7 +90,7 @@ export default function BuyTicket({ remainedUSDC }: { remainedUSDC: number }) {
       await refund();
       toast.success("Transaction Successful!");
     } catch (err: any) {
-      toast.error("Transaction Failed");
+      toast.error(err.message);
     }
   };
 
