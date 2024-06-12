@@ -10,7 +10,7 @@ import {
   refund,
 } from "@/lib/contracts/drop";
 import toast from "react-hot-toast";
-import { formatEther } from "viem";
+import { formatUnits } from "viem";
 
 import PandaImage from "@/assets/images/panda2.png";
 
@@ -25,7 +25,7 @@ export default function BuyTicket({ remainedUSDC }: { remainedUSDC: number }) {
   useEffect(() => {
     const fetchTicketPrice = async () => {
       const draw = await getDraw();
-      const ticketPrice = Number(formatEther(draw[2]));
+      const ticketPrice = Number(formatUnits(draw[2], 6));
       setTicketPrice(ticketPrice);
     };
     fetchTicketPrice();

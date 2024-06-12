@@ -12,11 +12,8 @@ import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import GradientImage from "@/assets/images/bg_gradient.png";
 import { getDistributionRate, getDraw } from "@/lib/contracts/drop";
-import { formatEther } from "viem";
-// import { getBalance } from "@/lib/contracts/usdc";
-// import { FORTUNE_ADDRESS } from "@/config/env";
+import { formatUnits } from "viem";
 import { calculateCompletionPercentage } from "@/lib/utils";
-// import Slider from "../Slider";
 
 const steps: { image: StaticImageData; title: string; description: string }[] =
   [
@@ -50,9 +47,9 @@ export default function TicketSection() {
     const fetchDraw: any = async () => {
       const draw = await getDraw();
 
-      const hardcap = Number(formatEther(draw[8]));
-      const softcap = Number(formatEther(draw[9]));
-      const depositedAmountForDraw = Number(formatEther(draw[3]));
+      const hardcap = Number(formatUnits(draw[8], 6));
+      const softcap = Number(formatUnits(draw[9], 6));
+      const depositedAmountForDraw = Number(formatUnits(draw[3], 6));
 
       setHardcap(hardcap);
       setSoftcap(softcap);

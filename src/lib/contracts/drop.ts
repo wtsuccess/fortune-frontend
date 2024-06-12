@@ -8,23 +8,23 @@ import {
 } from '@wagmi/core';
 import fortuneAbi from "@/lib/abi/fortune.json";
 import { FORTUNE_ADDRESS } from '@/config/env';
-import { parseEther, formatEther } from 'viem';
+import { formatUnits, parseUnits } from 'viem';
 import { approve, getAllowance, getBalance } from './usdc';
 
 export const drop = async (numTicket: number) => {
     const account = getAccount(config);
     const draw = await getDraw();
-    const ticketPrice = Number(formatEther(draw[2]));
+    const ticketPrice = Number(formatUnits(draw[2], 6));
     const totalPrice = numTicket * ticketPrice;
 
     if (!account.address) throw Error('Please connect your wallet');
     if (numTicket <= 0) throw Error('Ticket should be larger than 0');
-    if (await getBalance(account.address) < parseEther(totalPrice + "")) throw Error("You don't have enough USDC");
+    if (await getBalance(account.address) < parseUnits(totalPrice + "", 6)) throw Error("You don't have enough USDC");
 
     const openDrawId = await getOpenDrawId();
     const allowance = await getAllowance(account.address, FORTUNE_ADDRESS);
 
-    if (allowance < parseEther(totalPrice + "")) {
+    if (allowance < parseUnits(totalPrice + "", 6)) {
         const approveTx = await approve(totalPrice);
     }
 
@@ -96,7 +96,7 @@ export const getDepositedAmount = async () => {
         args: [account.address, openDrawId]
     });
 
-    return Number(formatEther(depositedAmount));
+    return Number(formatUnits(depositedAmount, 6));
 }
 
 export const refund = async () => {
